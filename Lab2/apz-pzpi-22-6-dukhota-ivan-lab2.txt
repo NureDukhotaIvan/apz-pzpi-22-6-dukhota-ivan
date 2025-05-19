@@ -1,1 +1,334 @@
+МІНІСТЕРСТВО ОСВІТИ ТА НАУКИ УКРАЇНИ
+ХАРКІВСЬКИЙ НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ РАДІОЕЛЕКТРОНІКИ
+
+
+Кафедра Програмної інженерії
+
+
+
+ЗВІТ
+З дисципліни «Архітектура програмного забезпечення»
+З лабораторної роботи №2
+На тему: «Серверна частина програмного застосунку»
+
+
+
+Виконав: 										   Перевірив:
+Ст. гр. ПЗПІ-22-6 							      Ст. вик. каф. ПІ
+Духота І. Є. 								        Сокорчук І. П.
+
+
+
+
+
+Харків 2025
+1 ІСТОРІЯ ЗМІН
+Зміни звіту наведені у таблиці 1.1
+Таблиця 1.1 – Історія змін
+№	Дата	Версія звіту	Опис змін
+1	07.05.2025	0.1	Створено розділ «Історія змін»
+2	07.05.2025	0.1	Створено розділ «Завдання»
+3	07.05.2025	0.1	Створено розділ “Опис виконаної роботи”
+4	07.05.2025	0.1	Створено розділ “Висновки”
+5	07.05.2025	0.1	Додано додаток А
+6	07.05.2025	0.1	Додано додаток Б
+7	07.05.2025	0.1	Додано додаток В
+
+
+
+2 ЗАВДАННЯ
+Потрібно розробити серверну / back-end частину програмної системи.
+Проаналізуйте завдання (додаток В).
+Виконати контрольні завдання.
+Відкрити створений на попередній лабораторній роботі репозиторій GitHub.
+Створіть у репозиторії директорію Lab2 та текстовий файл з описом інженерних рішень у цій частині проєкту.
+Зафіксуйте кожну внесену зміну командою git commit з відповідним коментарем та фіксуйте цією командою усі наступні зміни у проекті.
+Створіть у директорії Task2 піддиректорію для програмного коду.
+Створіть програмний код, завантажте його у створену піддиректорію, зафіксуйте внесені у репозиторій зміни. Виконайте функціональне тестування створеного програмного коду та створіть відеозапис цього тестування тривалістю 7-10 хвилин з усними поясненнями процесу тестування.
+Завантажте створений відеозапис тестування YouTube канал для вашого облікового запису в домені @nure.ua
+Створіть для завантаженого запису його хронологічний опис.
+Оформіть звіт у форматі pdf та завантажте його на навчальну платформу https://dl.nure.ua/
+У коментарях до завантаженого звіту вкажіть посилання на відеозапис тестування у вашому каналі YouTube.
+
+
+
+3 ОПИС ВИКОНАНОЇ РОБОТИ
+Програмна система має клієнт-серверну архітектуру. Серверна частина реалізована за допомогою фреймворку DRF (Django Rest Framework) на мові програмування Python. Для збереження даних використовується база даних PostgreSQL. Автентифікація користувачів відбувається через JWT.
+Серверна частина складається з наступних модулів:
+1. Авторизація: вхід користувачів.
+2. Керування сенсорами: перегляд, редагування та видалення сенсорів.
+3. Керування камерами: перегляд, редагування та видалення камер.
+4. Створення статистики інцидентів: отримання даних про інциденти та їх параметри.
+5. Адміністрування: виконання всіх операцій над всіма таблицями бази даних.
+На рисунках Б.1 – Б.4 у додатку Б наведені UML діаграми прецедентів.
+На рисунку Б.4 у додатку Б наведена діаграма розгортання.
+На рисунку Б.5 у додатку Б наведена діаграма компонентів.
+На рисунку Б.6 у додатку Б наведена ER-діаграма.
+
+Опис бази даних програмної системи описаний в таблицях 1-10.
+
+Таблиця 1 – Таблиця бази даних «User»
+id                   	 SERIAL PRIMARY KEY  
+email                	 VARCHAR(254) UNIQUE NOT NULL  
+role                 	 VARCHAR(10) CHECK (IN: 'student', 'parent', 'teacher', 'admin')  
+is_active            	 BOOLEAN DEFAULT TRUE  
+is_staff             	 BOOLEAN DEFAULT FALSE  
+
+Таблиця 2 – Таблиця бази даних «Student»
+id                   	 SERIAL PRIMARY KEY  
+user_id              	 INTEGER UNIQUE NOT NULL REFERENCES "user"(id) ON DELETE CASCADE  
+first_name           	 VARCHAR(100)  
+last_name            	 VARCHAR(100)  
+date_of_birth        	 DATE  
+student_class        	 VARCHAR(10)  
+access_card_number   	 VARCHAR(50)
+  
+Таблиця 3 – Таблиця бази даних «Parent»
+id                   	 SERIAL PRIMARY KEY  
+user_id              	 INTEGER UNIQUE NOT NULL REFERENCES "user"(id) ON DELETE CASCADE  
+first_name           	 VARCHAR(100)  
+last_name            	 VARCHAR(100)  
+
+Таблиця 4 – Таблиця бази даних «Parent_Students»
+id                   	 SERIAL PRIMARY KEY  
+parent_id            	 INTEGER NOT NULL REFERENCES parent(id) ON DELETE CASCADE  
+student_id           	 INTEGER NOT NULL REFERENCES student(id) ON DELETE CASCADE  
+
+Таблиця 5 – Таблиця бази даних «Teacher»
+id                   	 SERIAL PRIMARY KEY  
+user_id              	 INTEGER UNIQUE NOT NULL REFERENCES "user"(id) ON DELETE CASCADE  
+first_name           	 VARCHAR(100)  
+last_name            	 VARCHAR(100)  
+position             	 VARCHAR(100)  
+access_card_number   	 VARCHAR(50)  
+
+Таблиця 6 – Таблиця бази даних «Sensor»
+id                   	 SERIAL PRIMARY KEY  
+type                 	 VARCHAR(20) CHECK (IN: 'fire', 'intrusion', 'smoke', 'gas', 'temperature')  
+location             	 VARCHAR(100)  
+status               	 VARCHAR(20) CHECK (IN: 'active', 'disabled')  
+danger_percentage    	 FLOAT  
+Таблиця 7 – Таблиця бази даних «Camera»
+id                   	 SERIAL PRIMARY KEY  
+location             	 VARCHAR(100)  
+status               	 VARCHAR(20) CHECK (IN: 'active', 'disabled')  
+
+Таблиця 8 – Таблиця бази даних «Incident»
+id                   	 SERIAL PRIMARY KEY  
+type                 	 VARCHAR(20) CHECK (IN: 'fire', 'intrusion', 'smoke', 'gas', 'temperature')  
+description          	 TEXT  
+severity             	 INTEGER CHECK (1 ≤ severity ≤ 5)  
+date                 	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
+sensor_id            	 INTEGER REFERENCES sensor(id) ON DELETE SET NULL  
+camera_id            	 INTEGER REFERENCES camera(id) ON DELETE SET NULL  
+reported             	 BOOLEAN DEFAULT FALSE  
+
+Таблиця 9 – Таблиця бази даних «Attendance»
+id                   	 SERIAL PRIMARY KEY  
+student_id           	 INTEGER REFERENCES student(id) ON DELETE CASCADE  
+teacher_id           	 INTEGER REFERENCES teacher(id) ON DELETE SET NULL  
+date                 	 DATE  
+status               	 VARCHAR(10) CHECK (IN: 'present', 'absent')  
+
+Таблиця 10 – Таблиця бази даних «Notification»
+id                   	 SERIAL PRIMARY KEY  
+type                 	 VARCHAR(20) CHECK (IN: 'incident', 'attendance')  
+date                 	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
+description          	 TEXT  
+
+
+Таблиця 11 – Специфікації API
+Метод	Шлях	Опис
+POST	/api/students/	Створення student
+GET	/api/students/	Отримання списку student
+GET	/api/students/{id}/	Отримання за ID student
+PUT	/api/students/{id}/	Повне оновлення student
+PATCH	/api/students/{id}/	Часткове оновлення student
+DELETE	/api/students/{id}/	Видалення student
+POST	/api/parents/	Створення parent
+GET	/api/parents/	Отримання списку parent
+GET	/api/parents/{id}/	Отримання за ID parent
+PUT	/api/parents/{id}/	Повне оновлення parent
+PATCH	/api/parents/{id}/	Часткове оновлення parent
+DELETE	/api/parents/{id}/	Видалення parent
+POST	/api/teachers/	Створення teacher
+GET	/api/teachers/	Отримання списку teacher
+GET	/api/teachers/{id}/	Отримання за ID teacher
+PUT	/api/teachers/{id}/	Повне оновлення teacher
+PATCH	/api/teachers/{id}/	Часткове оновлення teacher
+DELETE	/api/teachers/{id}/	Видалення teacher
+POST	/api/sensors/	Створення sensor
+GET	/api/sensors/	Отримання списку sensor
+GET	/api/sensors/{id}/	Отримання за ID sensor
+PUT	/api/sensors/{id}/	Повне оновлення sensor
+PATCH	/api/sensors/{id}/	Часткове оновлення sensor
+DELETE	/api/sensors/{id}/	Видалення sensor
+POST	/api/cameras/	Створення camera
+GET	/api/cameras/	Отримання списку camera
+GET	/api/cameras/{id}/	Отримання за ID camera
+PUT	/api/cameras/{id}/	Повне оновлення camera
+PATCH	/api/cameras/{id}/	Часткове оновлення camera
+DELETE	/api/cameras/{id}/	Видалення camera
+POST	/api/incidents/	Створення incident
+GET	/api/incidents/	Отримання списку incident
+GET	/api/incidents/{id}/	Отримання за ID incident
+PUT	/api/incidents/{id}/	Повне оновлення incident
+PATCH	/api/incidents/{id}/	Часткове оновлення incident
+DELETE	/api/incidents/{id}/	Видалення incident
+POST	/api/notifications/	Створення notifications
+GET	/api/ notifications/	Отримання списку notifications
+GET	/api/ notifications/{id}/	Отримання за ID notifications
+PUT	/api/ notifications/{id}/	Повне оновлення notifications
+ PATCH	/api/ notifications/{id}/	Часткове оновлення notifications
+DELETE	/api/ notifications/{id}/	Видалення notifications
+POST	/api/ attendance/	Створення attendance
+GET	/api/ attendance/	Отримання списку attendance
+GET	/api/ attendance/{id}/	Отримання за ID attendance
+PUT	/api/ attendance/{id}/	Повне оновлення attendance
+PATCH	/api/ attendance/{id}/	Часткове оновлення attendance
+DELETE	/api/ attendance/{id}/	Видалення attendance
+GET	/api/sei/	Перегляд ефективності безпеки
+GET	/api/incident-stats/	Статистика інцидентів
+GET	/api/backup/	Резервне копіювання БД
+POST	/api/token/	Отримання JWT токена
+POST	/api/token/refresh/	Оновлення JWT токена
+
+4 ВИСНОВКИ
+Під час виконання лабораторної роботи було розроблено серверну частину програмної системи.
+
+
+
+Додаток А
+Посилання на відео та хронологічний опис
+
+Відеозапис доповіді на YouTube: https://youtu.be/erm2HHbFdSs
+Хронологічний опис доповіді: 
+00:00 - Початок відео
+00:10 – ER-діаграма БД
+00:17 - Серверна частина (отримання токену)
+00:40 - Моделі користувачів
+00:55 -Моделі: сенсори, камери, повідомлення, відвідування та інцидента
+3:04 - Бізнес-логіка: SecurityEffectivenessView
+4:11 - Бізнес-логіка: IncidentStatisticsView
+5:14- Бізнес-логіка: BackupDatabaseView
+
+
+
+Додаток Б
+Графічні моделі
+
+ 
+Рисунок Б.1 – UML діаграма прецедентів взаємодії адміністратора з системою
+
+ 
+Рисунок Б.2 – UML діаграма прецедентів взаємодії користувачів з системою
+
+ 
+Рисунок Б.3 – UML діаграма прецедентів взаємодії IoT-пристроїв з системою
+
+
+ 
+Рисунок Б.4 – Діаграма розгортання
+
+ 
+Рисунок Б.5 – Діаграма компонентів
+
+
+Рисунок Б.6 – ER-діаграма БД
+
+
+
+Додаток В
+Програмний код
+
+В.1 Перевірка ефективності системи безпеки
+
+1.  class SecurityEffectivenessView(APIView):
+2.      permission_classes = [IsAuthenticated, IsAdmin]
+3.  
+4.      def get(self, request):
+5.          total_sensors = Sensor.objects.count()
+6.          active_sensors = Sensor.objects.filter(status=True).count()
+7.  
+8.          total_cameras = Camera.objects.count()
+9.          active_cameras = Camera.objects.filter(status=True).count()
+10. 
+11.         incidents = Incident.objects.all()
+12.         total_incidents = incidents.count()
+13.         avg_severity = incidents.aggregate(avg=Avg('severity'))['avg'] or 0
+14. 
+15.         total_students = Student.objects.count()
+16.         today = date.today()
+17.         week_ago = today - timedelta(days=7)
+18.         attendance = Attendance.objects.filter(date__range=(week_ago, today))
+19.         total_attendance = attendance.count()
+20.         present_count = attendance.filter(status='present').count()
+21. 
+22.         sensor_coverage = active_sensors / total_sensors if total_sensors else 0
+23.         camera_coverage = active_cameras / total_cameras if total_cameras else 0
+24.         incident_frequency = total_incidents / 30
+25.         avg_attendance = present_count / total_attendance if total_attendance else 0
+26.         normalized_severity = avg_severity / 10
+27. 
+28.         SEI = (
+29.             0.25 * sensor_coverage +
+30.             0.25 * camera_coverage +
+31.             0.20 * (1 - incident_frequency) +
+32.             0.20 * avg_attendance +
+33.             0.10 * (1 - normalized_severity)
+34.         )
+35. 
+36.         return Response({"SEI_index": round(SEI, 2)})
+
+В.2 Перегляд статистики інцидентів
+
+1.  class IncidentStatisticsView(APIView):
+2.      permission_classes = [IsAuthenticated, IsAdmin]
+3.  
+4.      def get(self, request):
+5.          incidents = Incident.objects.all()
+6.          total = incidents.count()
+7.          categories = incidents.values('type').annotate(count=Count('id'))
+8.  
+9.          month_start = now().replace(day=1)
+10.         month_incidents = incidents.filter(date__gte=month_start)
+11. 
+12.         avg_count = total / 30 if total else 0
+13.         min_severity = incidents.aggregate(Min('severity'))['severity__min'] or 0
+14.         max_severity = incidents.aggregate(Max('severity'))['severity__max'] or 0
+15.         avg_severity = incidents.aggregate(Avg('severity'))['severity__avg'] or 0
+16. 
+17.         return Response({
+18.             "total_incidents": total,
+19.             "categories": list(categories),
+20.             "avg_count_per_day": round(avg_count, 2),
+21.             "severity": {
+22.                 "min": min_severity,
+23.                 "max": max_severity,
+24.                 "avg": round(avg_severity, 2)
+25.             }
+26.         })
+
+В.3 Бекап бази даних
+
+1.  class BackupDatabaseView(APIView):
+2.      permission_classes = [IsAuthenticated, IsAdmin]
+3.  
+4.      def post(self, request):
+5.          timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+6.          file_path = rf'D:\SchoolDef-backup\backup_{timestamp}.sql'
+7.  
+8.          try:
+9.              os.environ['PGPASSWORD'] = settings.DATABASES['default']['PASSWORD']
+10.             subprocess.run([
+11.                 'pg_dump',
+12.                 '-U', settings.DATABASES['default']['USER'],
+13.                 '-h', settings.DATABASES['default'].get('HOST', 'localhost'),
+14.                 '-F', 'c',
+15.                 settings.DATABASES['default']['NAME'],
+16.                 '-f', file_path
+17.             ], check=True)
+18.             return Response({"status": "success", "file": file_path})
+19.         except Exception as e:
+20.             return Response({"status": "error", "message": str(e)}, status=500)
 
