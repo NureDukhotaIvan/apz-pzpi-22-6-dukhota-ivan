@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="stat.css">
+</head>
+
+<body>
+
+    <div class="header-row">
+        <div class="header-row-left">
+            <p>Admin Panel "SchoolDef"</p>
+        </div>
+        <div class="header-row-right">
+            <button id="cameraPage">Cameras</button>
+            <button id="sensorPage">Sensors</button>
+            <button id="userPage">Users</button>
+            <button id="statPage">Statistic</button>
+            <button id="settingsBtn" data-i18n="settings">Settings</button>
+            <div id="languageMenu">
+                <button class="langBtn" data-lang="uk">Українська</button>
+                <button class="langBtn" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="btns-block">
+            <button id="SEI">SEI</button>
+            <button id="incidentStat">Incident statistic</button>
+            <button id="DBBackup">DB backup</button>
+            <button id="report">Repors</button>
+        </div>
+        <div class="data-output"></div>
+    </div>
+
+    <script src="stat.js"></script>
+</body>
+
+</html>
