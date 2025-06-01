@@ -1,1 +1,349 @@
+МІНІСТЕРСТВО ОСВІТИ ТА НАУКИ УКРАЇНИ
+ХАРКІВСЬКИЙ НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ РАДІОЕЛЕКТРОНІКИ
 
+
+Кафедра Програмної інженерії
+
+
+
+ЗВІТ
+З дисципліни «Архітектура програмного забезпечення»
+З лабораторної роботи №3
+На тему: «Веб-клієнт програмної системи»
+
+
+
+
+Виконав: 										   Перевірив:
+Ст. гр. ПЗПІ-22-6 						          доц. Сокорчук І. П.
+Духота І. Є.
+
+
+
+
+
+
+
+
+Харків 2025
+1 ІСТОРІЯ ЗМІН
+Зміни звіту наведені у таблиці 1.1
+Таблиця 1.1 – Історія змін
+№	Дата	Версія звіту	Опис змін
+1	01.06.2025	0.1	Створено розділ «Історія змін»
+2	01.06.2025	0.1	Створено розділ «Завдання»
+3	01.06.2025	0.1	Створено розділ “Опис виконаної роботи”
+4	01.06.2025	0.1	Створено розділ “Висновки”
+5	01.06.2025	0.1	Додано додаток А
+6	01.06.2025	0.1	Додано додаток Б
+7	01.06.2025	0.1	Додано додаток В
+
+
+
+2 ЗАВДАННЯ
+Проаналізувати технічні вимоги до front-end частини системи.
+Відкрити існуючий репозиторій на GitHub із результатами попередніх лабораторних.
+Створити в корені репозиторію папку Task3 та файл із описом інженерних рішень.
+Фіксувати всі зміни командою git commit із зрозумілими коментарями.
+У папці Task3 створити каталог для вихідного коду HTML, CSS, JS.
+Розробити та закомітити клієнтський код (HTML, CSS, JS.).
+Провести функціональне тестування, записати відео 7–10 хв. із усними поясненнями.
+Опублікувати відео на YouTube-каналі в домені @nure.ua і підготувати хронологічний опис.
+Підготувати PDF-звіт із коротким описом архітектури, тестуванням і посиланням на відео.
+Завантажити PDF на платформу https://dl.nure.ua/ та в коментарях вказати посилання на відео. 
+
+
+3 ОПИС ВИКОНАНОЇ РОБОТИ
+Програмне забезпечення клієнтської/front-end частини реалізовано на стеку HTML+CSS+JS, із застосуванням бібліотеки i18next для інтернаціоналізації.
+Вся бізнес-логіки зосереджена на клієнті: 
+Завантаження всіх даних про всі сенсори та камери, завантаження всіх користувачів, реалізація математичних та адміністраторських бізнес-логік на одній з сторінок веб-застосунку.
+Обчислення коефіцієнта ефективності безпеки:
+Програма збирає інформацію про загальну кількість активних сенсорів, камер, загальну кількість інцидентів за останній місяць та їх середню жорстокість. В результаті за допомогою коефіцієнтів вираховується один загальний коефіцієнт. Чим менше коефіцієнт тим краще є результат.
+Загальна статистика інцидентів:
+Програма збирає всю інформацію про інциденти, групує за типом, підраховує кількість, групує жорстокість та рахує її середнє значення.
+Формування звітів: 
+Адміністратор має можливість викликати запит на створення звіту, який автоматично створить новий звіт у PDF форматі та завантажить на ПК.
+
+
+4 ВИСНОВКИ
+Під час виконання лабораторної роботи було розроблено front-end частину програмної системи за допомогою HTML, CSS та JS. Було додано можливість виконувати CRUD-операції над всіма типами даних у адміністративній панелі. Загалом, обрана архітектура забезпечує модульність, простоту підтримки й подальшого розширення функціоналу.
+
+
+
+
+Додаток А
+Посилання на відео та хронологічний опис
+
+Відеозапис доповіді на YouTube: https://youtu.be/2AdmUgngAWQ
+Хронологічний опис доповіді: 
+00:00 – Початок
+00:32 – Демонстрація входу в акаунт адміністратора
+00:42 – Сторінка контролю камер (додавання, видалення та перегляд камер)
+01:06 – Сторінка контролю сенсорів (додавання, видалення та перегляд сенсорів)
+02:04 – Сторінка контролю користувачів (додавання, видалення та перегляд користувачів)
+02:53 – Демонстрація коефіцієнту безпеки системи
+03:31 – Демонстрація статистики інцидентів
+03:55 – Демонстрація роботи бекапу БД
+04:08 – Створення звітів
+04:25 – Демонстрація роботи інтернаціоналізації
+
+
+Додаток Б
+ 
+Рисунок 1 – UML діаграма прецедентів
+
+ 
+Рисунок 2 – Діаграма компонентів
+ 
+Рисунок 3 – Діаграма взаємодії
+
+ 
+Рисунок 4 – Діаграма станів
+
+
+Додаток В
+Програмний код
+
+В.1 Обробка створення звітів
+GitHub репозиторій: https://github.com/NureDukhotaIvan/apz-pzpi-22-6-dukhota-ivan/blob/main/Lab3/pzpi-22-6-dukhota-ivan-lab3/stat.js 
+1. document.getElementById("report").addEventListener("click", async () => {
+2.   try {
+3.     const response = await fetch("http://localhost:8000/api/blogic/report/", {
+4.       method: "GET",
+5.       headers: {
+6.         'Authorization': `Bearer ${token}`,
+7.         'Content-Type': 'application/json'
+8.       }
+9.     });
+10. 
+11.     if (!response.ok) {
+12.       throw new Error("Помилка при завантаженні звіту");
+13.     }
+14. 
+15.     const blob = await response.blob();
+16.     const url = window.URL.createObjectURL(blob);
+17. 
+18.     const a = document.createElement("a");
+19.     a.href = url;
+20.     a.download = "incident_report.pdf";
+21.     document.body.appendChild(a);
+22.     a.click();
+23.     a.remove();
+24. 
+25.     window.URL.revokeObjectURL(url);
+26.   } catch (error) {
+27.     alert("Не вдалося завантажити звіт: " + error.message);
+28.   }
+29. });
+
+
+
+
+В.2 CRUD операції над камерами 
+GitHub репозиторій: https://github.com/NureDukhotaIvan/apz-pzpi-22-6-dukhota-ivan/blob/main/Lab3/pzpi-22-6-dukhota-ivan-lab3/cio.js 
+1.  try {
+2.         const response = await fetch('http://localhost:8000/api/iot/cameras/', {
+3.             headers: {
+4.                 'Authorization': `Bearer ${token}`
+5.             }
+6.         });
+7. 
+8.         if (!response.ok) throw new Error('Ошибка получения данных');
+9. 
+10.         const cameras = await response.json();
+11.         const section = document.querySelector('.camera-section');
+12.         section.innerHTML = '';
+13. 
+14.         cameras.forEach(camera => {
+15.             const div = document.createElement('div');
+16.             div.classList.add('camera-item');
+17.             div.innerHTML = `
+18.                 <div class="camera-item-top">
+19.                     <p>${camera.location}</p>
+20.                     <button class="delete-btn" data-camera-id="${camera.id}">❌</button>
+21.                 </div>
+22.                 <div class="camera-item-bottom"></div>
+23.             `;
+24.             section.appendChild(div);
+25.         });
+26. 
+27.         document.querySelectorAll('.delete-btn').forEach(btn => {
+28.             btn.addEventListener('click', async (e) => {
+29.                 const cameraId = e.target.getAttribute('data-camera-id');
+30.                 const confirmation = confirm('Ви точно хочете видалити камеру? Ця дія буде незворотня.');
+31. 
+32.                 if (confirmation) {
+33.                     try {
+34.                         const deleteResponse = await fetch(`http://localhost:8000/api/iot/cameras/${cameraId}/`, {
+35.                             method: 'DELETE',
+36.                             headers: {
+37.                                 'Authorization': `Bearer ${token}`
+38.                             }
+39.                         });
+40. 
+41.                         if (deleteResponse.ok) {
+42.                             alert('Камера видалена');
+43.                             location.reload();
+44.                         } else {
+45.                             const errorData = await deleteResponse.json();
+46.                             alert('Ошибка: ' + (errorData.detail || 'Не удалось удалить камеру'));
+47.                         }
+48.                     } catch (err) {
+49.                         console.error('Delete error:', err);
+50.                         alert('Ошибка при удалении камеры');
+51.                     }
+52.                 }
+53.             });
+54.         });
+55. 
+56.     } catch (err) {
+57.         console.error('Fetch error:', err);
+58.         alert('Не вдалося завантажити камери');
+59.     }
+60. 
+61.     document.querySelector('.manage-section-row5 button').addEventListener('click', async () => {
+62.         const locationVal = parseInt(document.getElementById('pickCameraLocation').value);
+63.         const statusVal = parseInt(document.getElementById('pickCameraStatus').value);
+64. 
+65.         const locationStr = locationMap[locationVal];
+66.         const statusStr = statusVal === 2 ? 'active' : 'disabled';
+67. 
+68.         if (!locationStr || !statusStr) {
+69.             alert('Оберіть локацію та статус!');
+70.             return;
+71.         }
+72. 
+73.         try {
+74.             const checkResponse = await fetch('http://localhost:8000/api/iot/cameras/', {
+75.                 headers: {
+76.                     'Authorization': `Bearer ${token}`
+77.                 }
+78.             });
+79. 
+80.             if (!checkResponse.ok) throw new Error('Помилка при перевірці камер');
+81. 
+82.             const existingCameras = await checkResponse.json();
+83.             const locationAlreadyUsed = existingCameras.some(cam => cam.location === locationStr);
+84. 
+85.             if (locationAlreadyUsed) {
+86.                 alert(`Камера для локації "${locationStr}" вже існує`);
+87.                 return;
+88.             }
+89.             const response = await fetch('http://localhost:8000/api/iot/cameras/', {
+90.                 method: 'POST',
+91.                 headers: {
+92.                     'Content-Type': 'application/json',
+93.                     'Authorization': `Bearer ${token}`
+94.                 },
+95.                 body: JSON.stringify({ location: locationStr, status: statusStr })
+96.             });
+97. 
+98.             if (response.ok) {
+99.                 alert('Камеру додано!');
+100.                 location.reload();
+101.             } else {
+102.                 const errorData = await response.json();
+103.                 alert('Помилка: ' + (errorData.detail || 'Не вдалося додати камеру'));
+104.             }
+105. 
+106.         } catch (err) {
+107.             console.error('POST error:', err);
+108.             alert('Помилка при додаванні камери');
+109.         }
+110.     });
+111. });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+В.3 Бекап БД, статистика інцидентів, індекс безпеки
+GitHub репозиторій: https://github.com/NureDukhotaIvan/apz-pzpi-22-6-dukhota-ivan/blob/main/Lab3/pzpi-22-6-dukhota-ivan-lab3/stat.js 
+1. function fetchAndDisplay(url) {
+2.     fetch(url, {
+3.         method: 'GET',
+4.         headers: {
+5.             'Authorization': `Bearer ${token}`,
+6.             'Content-Type': 'application/json'
+7.         }
+8.     })
+9.     .then(res => {
+10.         if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+11.         return res.json();
+12.     })
+13.     .then(data => {
+14.         output.textContent = formatData(data);
+15.     })
+16.     .catch(error => {
+17.         output.textContent = `Ошибка: ${error.message}`;
+18.     });
+19. }
+20. 
+21. document.getElementById('SEI').addEventListener('click', () => {
+22.     fetchAndDisplay('http://localhost:8000/api/blogic/sei/');
+23. });
+24. 
+25. document.getElementById('incidentStat').addEventListener('click', () => {
+26.     fetchAndDisplay('http://localhost:8000/api/blogic/incident-stats/');
+27. });
+28. 
+29. document.getElementById('DBBackup').addEventListener('click', () => {
+30.     fetch('http://localhost:8000/api/blogic/backup/', {
+31.         method: 'POST',
+32.         headers: {
+33.             'Authorization': `Bearer ${token}`,
+34.             'Content-Type': 'application/json'
+35.         }
+36.     })
+37.     .then(res => {
+38.         if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+39.         return res.json();
+40.     })
+41.     .then(data => {
+42.         output.textContent = formatData(data);
+43.     })
+44.     .catch(error => {
+45.         output.textContent = `Ошибка: ${error.message}`;
+46.     });
+47. });
+48. 
+49. function formatData(data, indent = 0) {
+50.     const pad = ' '.repeat(indent);
+51.     let result = '';
+52. 
+53.     if (Array.isArray(data)) {
+54.         data.forEach((item, index) => {
+55.             result += `${pad}- ${formatData(item, indent + 2)}\n`;
+56.         });
+57.     } else if (typeof data === 'object' && data !== null) {
+58.         for (const key in data) {
+59.             const value = data[key];
+60.             if (typeof value === 'object') {
+61.                 result += `${pad}${key}:\n${formatData(value, indent + 2)}`;
+62.             } else {
+63.                 result += `${pad}${key}: ${value}\n`;
+64.             }
+65.         }
+66.     } else {
+67.         result += `${pad}${data}\n`;
+68.     }
+69. 
+70.     return result;
+71. }
