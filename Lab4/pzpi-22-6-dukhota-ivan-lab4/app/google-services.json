@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "107040587637",
+    "project_id": "school-e977a",
+    "storage_bucket": "school-e977a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107040587637:android:11a9ec4f28fc4e25b7dd3c",
+        "android_client_info": {
+          "package_name": "com.example.schooldefmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4gsGg9a4Jtbcwit6gBSklcXWbX8OoSBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
