@@ -1,1 +1,258 @@
+МІНІСТЕРСТВО ОСВІТИ ТА НАУКИ УКРАЇНИ
+ХАРКІВСЬКИЙ НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ РАДІОЕЛЕКТРОНІКИ
 
+
+Кафедра Програмної інженерії
+
+
+
+ЗВІТ
+З дисципліни «Архітектура програмного забезпечення»
+З лабораторної роботи №4
+На тему: «Мобільний клієнт програмної системи»
+
+
+
+
+Виконав: 										   Перевірив:
+Ст. гр. ПЗПІ-22-6 						          доц. Сокорчук І. П.
+Духота І. Є.
+
+
+
+
+
+
+
+
+Харків 2025
+1 ІСТОРІЯ ЗМІН
+Зміни звіту наведені у таблиці 1.1
+Таблиця 1.1 – Історія змін
+№	Дата	Версія звіту	Опис змін
+1	03.06.2025	0.1	Створено розділ «Історія змін»
+2	03.06.2025	0.1	Створено розділ «Завдання»
+3	03.06.2025	0.1	Створено розділ “Опис виконаної роботи”
+4	03.06.2025	0.1	Створено розділ “Висновки”
+5	03.06.2025	0.1	Додано додаток А
+6	03.06.2025	0.1	Додано додаток Б
+7	03.06.2025	0.1	Додано додаток В
+
+
+2 ЗАВДАННЯ
+Необхідно розробити мобільний програмний застосунок для будь-якої поширеної на сьогодні мобільної платформи.
+Проаналізуйте завдання.
+Виконайте контрольні завдання.
+Відкрийте створений на попередній лабораторній роботі репозиторій GitHub.
+Створіть у репозиторії директорію Lab4 та текстовий файл з описом інженерних рішень у цій частині проекту, як вказано у додатку З.
+Зафіксуйте кожну внесену зміну командою git commit з відповідним коментарем та фіксуйте цією командою усі наступні зміни у проекті.
+Створіть у директорії Lab4 піддиректорію для програмного коду.
+Створіть програмний код, завантажте його у створену піддиректорію, зафіксуйте внесені у репозиторій зміни.
+Виконайте функціональне тестування створеного програмного коду та створіть відеозапис цього тестування тривалістю 7..10 хвилин з усними поясненнями процесу тестування.
+Завантажте створений відеозапис тестування YouTube канал для вашого облікового запису в домені @nure.ua.
+Створіть для завантаженого запису його хронологічний опис.
+Оформіть звіт у форматі pdf та завантажте його на навчальну платформу https://dl.nure.ua/.
+У коментарях до завантаженого звіту вкажіть посилання на відеозапис тестування у вашому каналі YouTube. 
+
+
+3 ОПИС ВИКОНАНОЇ РОБОТИ
+Клієнтська частина була реалізована на сучасному стеку Android + Kotlin, із застосуванням архітектури MVVM (ViewModel + LiveData). Авторизація виконана через JWT (Simple JWT на бекенді), токени зберігаються у SharedPreferences і автоматично додаються до заголовка Authorization у всіх запитах. Навігація здійснюється за допомогою звичайних Android Activities.
+Бекенд-частина побудована на Django REST Framework із налаштованою перевіркою прав доступу (permissions) та CRUD-ендпоінтами для  Users, Students, Teachers, Parents та Incidents. 
+Було реалізовано логіку відображення статистики інцидентів для кожного користувача (загальні дані про всі інциденти впродовж місяця).
+Було реалізовано функціонал відображення повідомлень про інциденти для кожного користувача за допомогою запитів до серверної частини.
+Було реалізовано кнопку екстреного сповіщення для кожного користувача для надсилання екстрених повідомлень на серверну частину.
+
+
+4 ВИСНОВКИ
+В результаті виконання лабораторної роботи №4 було розроблено мобільний застосунок для програмної системи «SchoolDef». 
+
+
+ДОДАТОК А
+Посилання на відео та хронологічний опис
+
+Відеозапис доповіді на YouTube: https://youtu.be/ykwrLf1E8J8
+Хронологічний опис доповіді: 
+00:00 - Вступ
+00:25 - Вхід в акаунт
+00:40 - Демонстрація профілю користувача
+01:05 - Вікно для відображення повідомлення
+01:17 - Екстрена кнопка
+01:49 - Перегляд статистики інцидентів
+
+
+ДОДАТОК Б
+
+ 
+Рисунок 1 – UML діаграма прецедентів
+
+ 
+Рисунок 2 – Діаграма компонентів
+
+ 
+Рисунок 3 – Діаграма взаємодії
+
+ 
+Рисунок 4 – Діаграма станів
+
+
+ДОДАТОК В
+В.1 Екстрена кнопка
+GitHub репозиторій: https://github.com/NureDukhotaIvan/apz-pzpi-22-6-dukhota-ivan/blob/main/Lab4/pzpi-22-6-dukhota-ivan-lab4/app/src/main/java/com/example/schooldefmobile/profile/ProfileActivity.kt 
+1.  emergencyButton.setOnClickListener {
+2.             val emergencyUrl = "http://10.0.2.2:8000/api/action/emergency/"
+3.             val queue = Volley.newRequestQueue(this)
+4.             val jsonRequest = object : JsonObjectRequest(
+5.                 Method.POST, emergencyUrl, null,
+6.                 { _ ->
+7.                     Toast.makeText(this, "Екстрена дія відправлена", Toast.LENGTH_SHORT).show()
+8.                 },
+9.                 { error ->
+10.                     Toast.makeText(this, "Помилка відправки: ${error.message}", Toast.LENGTH_SHORT).show()
+11.                 }
+12.             ) {
+13.                 override fun getHeaders(): MutableMap<String, String> {
+14.                     val headers = HashMap<String, String>()
+15.                     headers["Authorization"] = "Bearer $token"
+16.                     return headers
+17.                 }
+18.             }
+19.             queue.add(jsonRequest)
+20.         }
+
+
+В.2 Повідомлення
+GitHub репозиторій: https://github.com/NureDukhotaIvan/apz-pzpi-22-6-dukhota-ivan/blob/main/Lab4/pzpi-22-6-dukhota-ivan-lab4/app/src/main/java/com/example/schooldefmobile/profile/ProfileActivity.kt 
+1.  private fun startNotificationPolling(token: String) {
+2.         val queue = Volley.newRequestQueue(this)
+3. 
+4.         val runnable = object : Runnable {
+5.             override fun run() {
+6.                 val jsonArrayRequest = object : JsonArrayRequest(
+7.                     Method.GET,
+8.                     NOTIFICATIONS_URL,
+9.                     null,
+10.                     { response ->
+11.                         if (response.length() > 0) {
+12.                             val notification = response.getJSONObject(0)
+13.                             val description = notification.getString("description")
+14.                             notificationTextView.text = description
+15.                         } else {
+16.                             notificationTextView.text = "Нових повідомлень немає"
+17.                         }
+18.                     },
+19.                     { error ->
+20.                     }
+21.                 ) {
+22.                     override fun getHeaders(): MutableMap<String, String> {
+23.                         return hashMapOf("Authorization" to "Bearer $token")
+24.                     }
+25.                 }
+26. 
+27.                 queue.add(jsonArrayRequest)
+28.                 handler.postDelayed(this, pollingInterval)
+29.             }
+30.         }
+31. 
+32.         handler.post(runnable)
+33.     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+В.3 Статистика інцидентів
+GitHub репозиторій: https://github.com/NureDukhotaIvan/apz-pzpi-22-6-dukhota-ivan/blob/main/Lab4/pzpi-22-6-dukhota-ivan-lab4/app/src/main/java/com/example/schooldefmobile/incidents/IncidentStatisticsActivity.kt 
+1. package com.example.schooldefmobile.incidents
+2. 
+3. import android.app.DownloadManager
+4. import android.os.Bundle
+5. import android.widget.Button
+6. import android.widget.TextView
+7. import android.widget.Toast
+8. import androidx.appcompat.app.AppCompatActivity
+9. import com.android.volley.Response
+10. import com.android.volley.toolbox.StringRequest
+11. import com.android.volley.toolbox.Volley
+12. import com.example.schooldefmobile.R
+13. import org.json.JSONObject
+14. 
+15. class IncidentStatisticsActivity : AppCompatActivity() {
+16. 
+17.     override fun onCreate(savedInstanceState: Bundle?) {
+18.         super.onCreate(savedInstanceState)
+19.         setContentView(R.layout.activity_incident_statistics)
+20. 
+21.         val prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+22.         val token = prefs.getString("access_token", null)
+23. 
+24.         if (token == null) {
+25.             Toast.makeText(this, "Помилка авторизації: токен відсутній", Toast.LENGTH_SHORT).show()
+26.             finish()
+27.             return
+28.         }
+29. 
+30.         val totalIncidentsTextView = findViewById<TextView>(R.id.totalIncidentsTextView)
+31.         val avgCountTextView = findViewById<TextView>(R.id.avgCountTextView)
+32.         val severityTextView = findViewById<TextView>(R.id.severityTextView)
+33.         val categoriesTextView = findViewById<TextView>(R.id.categoriesTextView)
+34.         val backButton = findViewById<Button>(R.id.backButton)
+35. 
+36.         backButton.setOnClickListener {
+37.             finish()
+38.         }
+39. 
+40.         val url = "http://10.0.2.2:8000/api/blogic/incident-stats/"
+41. 
+42.         val request = object : StringRequest(
+43.             DownloadManager.Request.Method.GET, url,
+44.             Response.Listener { response ->
+45.                 try {
+46.                     val json = JSONObject(response)
+47.                     totalIncidentsTextView.text = "Всього інцидентів: ${json.getInt("total_incidents")}"
+48.                     avgCountTextView.text = "Середня кількість на день: ${json.getDouble("avg_count_per_day")}"
+49. 
+50.                     val severity = json.getJSONObject("severity")
+51.                     severityTextView.text = """
+52.                         Серйозність:
+53.                           Мін: ${severity.getInt("min")}
+54.                           Макс: ${severity.getInt("max")}
+55.                           Середнє: ${severity.getDouble("avg")}
+56.                     """.trimIndent()
+57. 
+58.                     val categoriesArray = json.getJSONArray("categories")
+59.                     val categoriesText = StringBuilder()
+60.                     for (i in 0 until categoriesArray.length()) {
+61.                         val item = categoriesArray.getJSONObject(i)
+62.                         categoriesText.append("  ${item.getString("type")}: ${item.getInt("count")}\n")
+63.                     }
+64.                     categoriesTextView.text = "Категорії:\n$categoriesText"
+65.                 } catch (e: Exception) {
+66.                     Toast.makeText(this, "Помилка обробки даних", Toast.LENGTH_SHORT).show()
+67.                 }
+68.             },
+69.             Response.ErrorListener { error ->
+70.                 val errorMsg = error.networkResponse?.statusCode?.let { "Код $it" } ?: "Невідома помилка"
+71.                 Toast.makeText(this, "Помилка завантаження статистики: $errorMsg", Toast.LENGTH_SHORT).show()
+72.             }
+73.         ) {
+74.             override fun getHeaders(): Map<String, String> {
+75.                 return mapOf("Authorization" to "Bearer $token")
+76.             }
+77.         }
+78. 
+79.         Volley.newRequestQueue(this).add(request)
+80.     }
+81. }
