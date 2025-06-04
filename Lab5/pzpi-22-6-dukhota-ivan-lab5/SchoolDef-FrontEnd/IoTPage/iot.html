@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="iot.css">
+</head>
+
+<body>
+
+    <div class="header-row">
+        <div class="header-row-left">
+            <p>Admin Panel "SchoolDef"</p>
+        </div>
+        <div class="header-row-right">
+            <button id="cameraPage">Cameras</button>
+            <button id="sensorPage">Sensors</button>
+            <button id="userPage">Users</button>
+            <button id="statPage">Statistic</button>
+            <button id="settingsBtn" data-i18n="settings">Settings</button>
+            <div id="languageMenu">
+                <button class="langBtn" data-lang="uk">Українська</button>
+                <button class="langBtn" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="main-container-top">
+            <p>Sensors control</p>
+        </div>
+        <div class="main-container-bottom">
+
+            <div class="sensor-section"></div>
+
+            <div class="manage-section">
+                <div class="manage-section-row1">
+                    <p>Add a new sensor</p>
+                </div>
+
+                <div class="manage-section-row2">
+                    <p>Choose location:</p>
+                    <select name="sensorLocations" id="pickSensorLocation" class="sensor-pick">
+                        <option value="0">-</option>
+                        <option value="1">Math class</option>
+                        <option value="2">Second Entrance</option>
+                        <option value="3">Security room</option>
+                        <option value="4">Shelter</option>
+                        <option value="5">PE class</option>
+                        <option value="6">Canteen</option>
+                        <option value="7">Main Hall</option>
+                        <option value="8">Main Entrance</option>
+                        <option value="9">Concert Hall</option>
+                    </select>
+                </div>
+
+                <div class="manage-section-row3">
+                    <p>Choose status:</p>
+                    <select name="sensorStatus" id="pickSensorStatus" class="sensor-pick">
+                        <option value="0">-</option>
+                        <option value="1">disabled</option>
+                        <option value="2">active</option>
+                    </select>
+                </div>
+
+                <div class="manage-section-row4">
+                    <p>Choose Type:</p>
+                    <select name="sensorType" id="pickSensorType" class="sensor-pick">
+                        <option value="0">-</option>
+                        <option value="1">fire</option>
+                        <option value="2">gas</option>
+                        <option value="3">smoke</option>
+                        <option value="4">temperature</option>
+                        <option value="5">intrusion</option>
+                    </select>
+                </div>
+
+                <div class="manage-section-row6"></div>
+
+                <div class="manage-section-row5">
+                    <button id="addSensorBtn">Add</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="iot.js"></script>
+</body>

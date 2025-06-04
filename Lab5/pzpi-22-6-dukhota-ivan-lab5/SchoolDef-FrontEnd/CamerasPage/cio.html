@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="cio.css" />
+    <script src="https://unpkg.com/i18next@21.9.1/i18next.min.js"></script>
+</head>
+
+<body>
+    <div class="header-row">
+        <div class="header-row-left">
+            <p data-i18n="admin_panel">Admin Panel "SchoolDef"</p>
+        </div>
+        <div class="header-row-right">
+            <button id="cameraPage" data-i18n="cameras">Cameras</button>
+            <button id="sensorPage" data-i18n="sensors">Sensors</button>
+            <button id="userPage" data-i18n="users">Users</button>
+            <button id="statPage" data-i18n="stats">Statistic</button>
+            <button id="settingsBtn" data-i18n="settings">Settings</button>
+            <div id="languageMenu">
+                <button class="langBtn" data-lang="uk">Українська</button>
+                <button class="langBtn" data-lang="en">English</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="main-container-top">
+            <p data-i18n="camera_control">Cameras control</p>
+        </div>
+        <div class="main-container-bottom">
+            <div class="camera-section"></div>
+            <div class="manage-section">
+                <div class="manage-section-row1">
+                    <p data-i18n="add_camera">Add a new camera</p>
+                </div>
+                <div class="manage-section-row2">
+                    <p data-i18n="choose_location">Choose location:</p>
+                    <select name="cameraLocations" id="pickCameraLocation" class="camera-pick">
+                        <option value="0">-</option>
+                        <option value="1" data-i18n="loc_math">Math class</option>
+                        <option value="2" data-i18n="loc_entrance2">Second Entrance</option>
+                        <option value="3" data-i18n="loc_secroom">Security room</option>
+                        <option value="4" data-i18n="loc_shelter">Shelter</option>
+                        <option value="5" data-i18n="loc_pe">PE class</option>
+                        <option value="6" data-i18n="loc_canteen">Canteen</option>
+                        <option value="7" data-i18n="loc_hall">Main Hall</option>
+                        <option value="8" data-i18n="loc_entrance">Main Entrance</option>
+                        <option value="9" data-i18n="loc_concert">Concert Hall</option>
+                    </select>
+                </div>
+                <div class="manage-section-row3">
+                    <p data-i18n="choose_status">Choose status:</p>
+                    <select name="cameraStatus" id="pickCameraStatus" class="camera-pick">
+                        <option value="0">-</option>
+                        <option value="1" data-i18n="status_disabled">Disabled</option>
+                        <option value="2" data-i18n="status_active">Active</option>
+                    </select>
+                </div>
+                <div class="manage-section-row4"></div>
+                <div class="manage-section-row5">
+                    <button data-i18n="add_btn">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cio.js"></script>
+    <script src="i18n-init.js"></script>
+</body>
+
+</html>

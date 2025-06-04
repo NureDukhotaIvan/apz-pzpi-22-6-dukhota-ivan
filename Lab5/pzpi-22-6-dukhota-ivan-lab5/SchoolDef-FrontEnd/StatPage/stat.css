@@ -1,0 +1,137 @@
+body,
+html {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: #948979;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#languageMenu {
+  display: none;
+  position: absolute;
+  top: 40px;       
+  left: auto;
+  right: 0;
+  padding: 10px;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 150px;
+  gap: 10px;
+  background-color: #222831;
+}
+
+#languageMenu .langBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #444;
+}
+
+.header-row {
+    width: 1600px;
+    height: 50px;
+    background-color: #222831;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+.header-row-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: 50px;
+}
+
+.header-row-left p {
+    font-size: 20px;
+    color: #DFD0B8;
+    margin-left: 10px;
+}
+
+.header-row-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    max-height: 50px;
+}
+
+.header-row-right button {
+    width: 200px;
+    height: 30px;
+    background-color: #393E46;
+    border: none;
+    cursor: pointer;
+    color: #DFD0B8;
+    transition: transform 0.3s ease;
+    margin-right: 15px;
+    border-radius: 8px;
+}
+
+.header-row-right button:hover {
+    transform: scale(1.05);
+}
+
+.main-container {
+    width: 1800px;
+    height: 800px;
+    background-color: #222831;
+    border-radius: 12px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.btns-block {
+    width: 800px;
+    height: 60px;
+    border: none;
+    border-radius: 12px;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btns-block button {
+    width: 200px;
+    height: 40px;
+    background-color: #393E46;
+    border: none;
+    cursor: pointer;
+    color: #DFD0B8;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.btns-block button:hover {
+    transform: scale(1.05);
+}
+
+.data-output {
+    width: 1200px;
+    height: 600px;
+    border: 1px solid #393E46;
+    padding: 10px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    border-radius: 5px;
+    font-family: monospace;
+    color: #fff;
+
+    font-size: 20px;  
+}

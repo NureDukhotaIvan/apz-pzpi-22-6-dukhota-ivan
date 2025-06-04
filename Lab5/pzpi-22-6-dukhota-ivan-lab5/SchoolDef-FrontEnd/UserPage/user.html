@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="user.css">
+</head>
+
+<body>
+
+    <div class="header-row">
+        <div class="header-row-left">
+            <p>Admin Panel "SchoolDef"</p>
+        </div>
+        <div class="header-row-right">
+            <button id="cameraPage">Cameras</button>
+            <button id="sensorPage">Sensors</button>
+            <button id="userPage">Users</button>
+            <button id="statPage">Statistic</button>
+            <button id="settingsBtn" data-i18n="settings">Settings</button>
+            <div id="languageMenu">
+                <button class="langBtn" data-lang="uk">Українська</button>
+                <button class="langBtn" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add user</h2>
+            <form id="userForm">
+                <label for="role">User type:</label>
+                <select id="role" name="role" required>
+                    <option value="">Choose...</option>
+                    <option value="student">Student</option>
+                    <option value="parent">Parent</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+
+                <input type="email" id="email" name="email" placeholder="Email" required>
+<input type="text" id="first_name" name="first_name" placeholder="Ім'я" required>
+<input type="text" id="last_name" name="last_name" placeholder="Прізвище" required>
+
+                <div id="studentFields" class="role-fields hidden">
+  <input type="date" id="dob" name="dob" placeholder="Дата народження">
+  <input type="text" id="student_class" name="student_class" placeholder="Клас">
+</div>
+
+                <div id="parentFields" class="role-fields hidden">
+  <input type="number" id="student_id" name="student_id" placeholder="ID студента">
+</div>
+
+<div id="teacherFields" class="role-fields hidden">
+  <input type="text" id="position" name="position" placeholder="Посада">
+</div>
+
+                <button type="submit" class="modal-button">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-container">
+
+        <div class="main-container-top">
+            <p>User Control</p>
+            <button id="addUser">Add user</button>
+        </div>
+
+        <div class="main-container-bottom">
+            <table id="studentsTable" class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Birth date</th>
+                        <th>Class</th>
+                        <th>Access card</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTbody"></tbody>
+            </table>
+
+            <table id="parentsTable" class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Studnt</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="parentsTbody"></tbody>
+            </table>
+
+            <table id="teachersTable" class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Position</th>
+                        <th>Access card</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="teachersTbody"></tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script src="user.js"></script>
+</body>

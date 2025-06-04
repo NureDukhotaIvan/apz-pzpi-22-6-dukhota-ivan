@@ -1,0 +1,230 @@
+body,
+html {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: #948979;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#languageMenu {
+  display: none;
+  position: absolute;
+  top: 40px;       
+  left: auto;
+  right: 0;
+  padding: 10px;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 150px;
+  gap: 10px;
+  background-color: #222831;
+}
+
+#languageMenu .langBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #444;
+}
+
+.header-row {
+    width: 1600px;
+    height: 50px;
+    background-color: #222831;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+.header-row-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: 50px;
+}
+
+.header-row-left p {
+    font-size: 20px;
+    color: #DFD0B8;
+    margin-left: 10px;
+}
+
+.header-row-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    max-height: 50px;
+}
+
+.header-row-right button {
+    width: 200px;
+    height: 30px;
+    background-color: #393E46;
+    border: none;
+    cursor: pointer;
+    color: #DFD0B8;
+    transition: transform 0.3s ease;
+    margin-right: 15px;
+    border-radius: 8px;
+}
+
+.header-row-right button:hover {
+    transform: scale(1.05);
+}
+
+.main-container {
+    width: 1900px;
+    height: 800px;
+    background-color: #222831;
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: 7% 93%;
+    margin-top: 20px;
+}
+
+.main-container-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #17191b;
+    max-height: 59.36px;
+}
+
+.main-container-top p {
+    font-size: 24px;
+    color: #DFD0B8;
+    margin-left: 20px;
+}
+
+.main-container-top button {
+    width: 200px;
+    height: 30px;
+    background-color: #393E46;
+    border: none;
+    cursor: pointer;
+    color: #DFD0B8;
+    transition: transform 0.3s ease;
+    margin-left: 25px;
+    border-radius: 8px;
+}
+
+.main-container-bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 60px;
+}
+
+
+.custom-table {
+    width: 350px;
+    min-height: 500px;
+    border-collapse: collapse;
+    background-color: #393E46;
+    color: #DFD0B8;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #DFD0B8;
+    text-align: center;
+}
+
+.custom-table th {
+    background-color: #17191b;
+    color: #DFD0B8;
+    font-weight: bold;
+}
+
+.custom-table tr:hover {
+    background-color: #555;
+}
+
+.custom-table td:last-child {
+    text-align: center;
+}
+
+.custom-table td button {
+    margin: 0 auto;
+    display: block;
+}
+
+.custom-table button {
+    background-color: #FF4C4C;
+    color: #DFD0B8;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.custom-table button:hover {
+    background-color: #E04343;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.hidden { display: none; }
+input, select, button {
+  display: block;
+  width: 90%;
+  padding: 8px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.modal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  background-color: #0056b3;
+}

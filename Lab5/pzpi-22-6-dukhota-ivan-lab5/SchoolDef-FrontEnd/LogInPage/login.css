@@ -1,0 +1,72 @@
+body, html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #948979;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.main-container {
+    width: 500px;
+    height: 400px;
+    background-color: #222831;
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: 15% 70% 15%;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name h1 {
+    font-size: 24px;
+    color: #DFD0B8;
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.data-input {
+    width: 90%;
+    height: 40px;
+    outline: none;
+    border-radius: 8px;
+    background-color: #393E46;
+    border: none;
+    font-size: 18px;
+    color: #DFD0B8;
+    padding: 5px;
+}
+
+.accept {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accept button {
+    width: 120px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: #393E46;
+    font-size: 16px;
+    color: #DFD0B8;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.accept button:hover {
+    transform: scale(1.05);
+}
