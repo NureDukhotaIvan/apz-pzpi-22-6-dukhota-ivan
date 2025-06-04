@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#121212">
+
+    <TextView
+        android:id="@+id/fullNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ім'я Прізвище"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/birthDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Дата народження"
+        android:textColor="#FFFFFF"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Електрона пошта"
+        android:textColor="#FFFFFF"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/classTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Клас"
+        android:textColor="#FFFFFF"
+        android:paddingBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginBottom="24dp">
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вийти"
+            android:textColor="#FFFFFF"
+            android:background="#B00020"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/notificationPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:text="Тут будуть повідомлення"
+        android:textColor="#AAAAAA"
+        android:gravity="center"
+        android:background="#2C2C2C"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/actionNotificationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Екстрена кнопка"
+        android:textColor="#FFFFFF"
+        android:background="#B00020"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/viewStatisticsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Перегляд статистики інцидентів"
+        android:textColor="#FFFFFF"
+        android:background="#3700B3"
+        android:padding="12dp"/>
+</LinearLayout>
